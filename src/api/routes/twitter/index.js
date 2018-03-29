@@ -14,7 +14,7 @@ import validate from 'celebrate';
 export default ({ logger }) => {
     let api = Router();
 
-    // Get a list of all reports
+    // Get a list of all tweets matching the searchString
     api.get('/', ensureAuthenticated, cacheResponse('1 minute'),
         validate({
             query: {

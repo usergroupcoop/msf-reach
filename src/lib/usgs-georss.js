@@ -5,12 +5,19 @@ import rp from 'request-promise';
 import cheerio from 'cheerio';
 import { inAsiaBBox } from './util.js';
 
+/**
+ * tidy up the summary data using cheerio library
+ * @function tidySummary
+ * @param {string} summary data
+ */
 var tidySummary = function(summary) {
     var $ = cheerio.load(summary);
     return '<br>Time: ' + $('dt').next().html() + ' (' +
     $('dt').next().next().html() + ')<br>' +
     'Depth: ' + $('dt').next().next().next().next().next().next().html();
 };
+
+// Take US Geological Survey atom (rss) data and return geojson with required properties.
 
 const USGS = () =>
     new Promise((resolve, reject) => {

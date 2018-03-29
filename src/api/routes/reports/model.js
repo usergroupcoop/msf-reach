@@ -51,7 +51,7 @@ export default (config, db, logger) => ({
 
     /**
 	 * Create a new report
-	 * @param {object} body Body of request with event details
+	 * @param {object} body Body of request with report details
 	 */
     createReport: (body) => new Promise((resolve, reject) => {
 

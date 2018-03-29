@@ -13,6 +13,7 @@ import validate from 'celebrate';
 export default ({ config, db, logger }) => {
     let api = Router();
 
+    // get all historical missions
     api.get('/', ensureAuthenticated, cacheResponse('10 minutes'),
         validate({
             query: {
@@ -39,6 +40,7 @@ export default ({ config, db, logger }) => {
             })
     );
 
+    // get an individual historical mission by id
     api.get('/:id',ensureAuthenticated, cacheResponse('1 minute'),
         validate({
             params: { id: Joi.number().integer().min(1).required() } ,

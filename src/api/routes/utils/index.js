@@ -18,13 +18,14 @@ const uuidv4 = require('uuid/v4');
 export default ({ config, db, logger }) => { // eslint-disable-line no-unused-vars
     let api = Router();
 
+    // set up the s3 signature version and region
     let s3= new S3(
         {
             signatureVersion: 'v4',
             region: config.AWS_S3_REGION
         });
 
-
+    // get a signed s3 upload url
     api.get('/uploadurl', cacheResponse('1 minute'), validate({
         query: {
             filename: Joi.string().required(),
@@ -56,10 +57,11 @@ export default ({ config, db, logger }) => { // eslint-disable-line no-unused-va
 
     });
 
+    // update report with AI image labels
     api.post('/updateimagelabels',(req,res,next)=>{
 
         let params=req.body;
-        //make sure keys are identical
+        // make sure API key is supplied and matches
         if (req.headers['x-api-key'] === config.API_KEY)
         {
             let query = `UPDATE ${config.TABLE_REPORTS}

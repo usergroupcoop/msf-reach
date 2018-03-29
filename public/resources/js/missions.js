@@ -75,8 +75,12 @@ var getMissions = function(term) {
     });
 };
 
+
+// variables for mission data
 var missionData = {};
 var missionCoordinates = {};
+
+// open mission modal on click
 var onMissionLinkClick = function(id) {
     $.getJSON('/api/missions/' + id, function(data) {
         missionData = data ? data.result.objects.output.geometries[0].properties.properties : {};

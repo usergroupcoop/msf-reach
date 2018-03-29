@@ -5,6 +5,8 @@ import rp from 'request-promise';
 import { parseDms } from 'dms-conversion';
 import { inAsiaBBox } from './util.js';
 
+// scrape data from Tropical Storm Risk site and return geojson with desired properties
+
 const TSR = () =>
     new Promise((resolve, reject) => {
         let HOST = 'http://www.tropicalstormrisk.com/tracker/dynamic';

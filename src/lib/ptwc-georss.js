@@ -5,6 +5,8 @@ import rp from 'request-promise';
 
 import { inAsiaBBox } from './util.js';
 
+// Take Pacific Tsunami Warning Center georss data and return geojson with required properties.
+
 const PTWC = () =>
     new Promise((resolve, reject) => {
         var options = {
@@ -24,7 +26,7 @@ const PTWC = () =>
                 let title = result.rss.channel.title;
 
                 let features = []; // store for features
-                if (result.rss.channel[0].item) {                  
+                if (result.rss.channel[0].item) {
                     for (let i = 0; i < result.rss.channel[0].item.length; i++) {
                         let event = result.rss.channel[0].item[i];
                         //console.log(event);

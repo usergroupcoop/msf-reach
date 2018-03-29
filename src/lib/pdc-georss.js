@@ -5,6 +5,8 @@ import rp from 'request-promise';
 
 import { inAsiaBBox } from './util.js';
 
+// Take Pacific Disaster Center georss data and return geojson with required properties.
+
 const PDC = () => new Promise((resolve, reject) => {
 
     var options = {

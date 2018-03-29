@@ -107,6 +107,7 @@ const handleResponse = (data, req, res) => {
         res.status(200).json({ statusCode: 200, result: data });
 };
 
+// Define Asia bbox for use in filtering hazards data
 const inAsiaBBox = (coords) => {
     return true; // default to true for this test env
     /*

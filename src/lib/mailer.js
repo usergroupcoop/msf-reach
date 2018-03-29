@@ -19,6 +19,13 @@ let smtpConfig = {
 
 var transport = nodemailer.createTransport(smtpConfig);
 
+/**
+    * send an email
+    * @function mail
+    * @param {string} receiver - receiver(s) of the email2
+    * @param {string} emContext - email context
+    * @param {Object} logger - logging object for logging any errors
+    */
 module.exports.mail = (receiver,emContext,logger) => new Promise((resolve, reject) =>
 {
 

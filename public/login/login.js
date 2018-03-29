@@ -6,12 +6,17 @@ var POOL_DATA = {
     ClientId : '73gosti29t46shjpimsftau160' // Your client id here
 };
 
+/** @function setJWTCookie
+ * @param {string} jwt
+ * sets up Cognito incl putting the JWT token as a cookie and also into local storage
+ */
 var setJWTCookie = function(jwt){
     Cookies.set('jwt', jwt);
     $.ajax({
         url: '/',
         type: 'GET',
         beforeSend: function(xhr){
+            // set appropriate http headers to include jwt token
             xhr.setRequestHeader('Authorization', 'Bearer ' + jwt);
         },
         error: function(err){
@@ -26,11 +31,18 @@ var setJWTCookie = function(jwt){
     });
 };
 
+/** @function authSuccess
+ *  gets the token and then sets it as a cookie in local storage
+ */
 var authSuccess = function(result){
     var token = result.getAccessToken().getJwtToken();
     setJWTCookie(token);
 };
 
+
+/** @function cognitoAuth
+ * handles Cognito authentication
+ */
 var cognitoAuth = function(){
     var authenticationData = {
         Username : $('#inputEmail').val(),
@@ -71,18 +83,18 @@ var cognitoAuth = function(){
     });
 };
 
-$('#login').click(function(){
+$('#login').click(function(){ // login on click
     $('#login').html('Authenticating....').attr('disabled',true);
     setTimeout(cognitoAuth,2);//force UI update before authenticating
 });
 
-$('#inputPassword').keyup(function(event){
+$('#inputPassword').keyup(function(event){ // allow user to just hit enter (keycode 13) to login
     if(event.keyCode == 13){
         $('#login').click();
     }
 });
 
-$(function() {
+$(function() { // show about page if #about hash parameter in URL
     if (location.hash === '#about') {
         $('#about').modal('show');
     }

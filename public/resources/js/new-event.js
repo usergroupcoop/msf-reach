@@ -54,6 +54,10 @@ newEventMap.on('click', function(e) {
 
 */
 
+/**
+ * refresh the landing page to show up a new event
+ * @function refreshLandingPage
+ */
 var refreshLandingPage = function() {
     var saveCookie = Cookies.get('Ongoing MSF Projects');
     mainMap.removeLayer(eventsLayer);
@@ -66,8 +70,9 @@ var refreshLandingPage = function() {
     $('watchingTab').tab('show');
 };
 
-
+// various input related functions
 $(function(){
+    // set up #inputEvDateTime as a date time picker element
     $( '#inputEvDateTime' ).datetimepicker({
         //controlType: 'select',
         changeMonth: true,
@@ -76,7 +81,7 @@ $(function(){
         yearRange: '1900:' + new Date().getFullYear()
     });
 
-
+    // create a new event - get the values and store them using a POST
     $('#createEvent').on('click', function (e) {
 
         if (latlng === null){

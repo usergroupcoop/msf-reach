@@ -10,7 +10,10 @@ export default (config, db, logger) => ({
     /**
     * Return contacts
     * @function all - returns contacts, optionally filtered by string
-    * @param {String} search - optional string search against name, email, cell
+    * @param {string} search - optional string search against name, email, phone numbers, employer, or speciality
+    * @param {string} msf_associate - optional "true"/"false" to search for msf_associates or not
+    * @param {string} msf_peer - ditto, for msf peers
+    * @param {string} type - category of contact to filter on
     */
     all: (search,bounds,msf_associate,msf_peer,type) => new Promise((resolve, reject) => {
         // Setup query
@@ -42,6 +45,12 @@ export default (config, db, logger) => ({
             .then((data) => resolve(data))
             .catch((err) => reject(err));
     }),
+
+    /**
+     * get an individual contact
+     * @function byId
+     * @param {integer} id - id of contact
+     */
 
     byId: (id) => new Promise((resolve, reject) => {
         // Setup query

@@ -8,7 +8,11 @@ import Promise from 'bluebird';
 export default (config, db, logger) => ({
 
     /**
-	* Return all events
+	* Return all missions
+  * @function all
+  * @param {string} search - optional search string
+  * @param {Object} bounds - optional bounding box coordinates (xmin,  ymin, xmax, ymax)
+  * @param {string} country - optional to limit by country
 	*/
     all: (search,bounds,country) => new Promise((resolve, reject) => {
         // Setup query
@@ -34,7 +38,8 @@ export default (config, db, logger) => ({
     }),
 
     /**
-		* Return mission specified by ID
+		* Return historical mission specified by ID
+    * @function byId
 		* @param {integer} id ID of mission
 		*/
     byId: id =>
@@ -54,6 +59,12 @@ export default (config, db, logger) => ({
                 .then(data => resolve(data))
                 .catch(err => reject(err));
         }),
+
+    /**
+    		* Create a historical mission entry
+        * @function createMission
+    		* @param {Object} body - all the details
+    		*/
     createMission: (body) => new Promise((resolve, reject) => {
         // Setup query
         let query = `INSERT INTO ${config.TABLE_MISSIONS}

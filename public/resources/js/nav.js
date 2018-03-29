@@ -1,3 +1,5 @@
+// nav menu
+
 var USERNAME = localStorage.getItem('username');
 
 $('#username').append(USERNAME);

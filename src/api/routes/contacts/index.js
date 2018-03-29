@@ -15,7 +15,9 @@ import validate from 'celebrate';
 export default ({ config, db, logger }) => {
     let api = Router();
 
+    // get all contacts
     api.get('/', ensureAuthenticated, cacheResponse('1 minute'),
+        // validate http query to make sure it has everything in the right format:
         validate({
             query: {
                 search: Joi.string().min(1),
@@ -29,6 +31,7 @@ export default ({ config, db, logger }) => {
                 geoformat: Joi.any().valid(config.GEO_FORMATS).default(config.GEO_FORMAT_DEFAULT)
             }
         }),
+        // handle off to the database function in model.js:
         (req, res, next) => contacts(config, db, logger).all(req.query.search,{
             xmin: req.query.lngmin,
             ymin: req.query.latmin,
@@ -43,6 +46,7 @@ export default ({ config, db, logger }) => {
             })
     );
 
+    // get an individual contact
     api.get('/:id', ensureAuthenticated, cacheResponse('1 minute'),
         validate({
             query: {

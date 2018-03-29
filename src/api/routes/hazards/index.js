@@ -28,6 +28,7 @@ export default ({ logger }) => {
             })
     );
 
+    // The following get methods get hazards from different data sources
     api.get('/usgs', ensureAuthenticated, cacheResponse('10 minutes'),
         (req, res, next) => USGS()
             .then((events) => {

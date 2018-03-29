@@ -4,6 +4,8 @@ import { parseString } from 'xml2js';
 import rp from 'request-promise';
 import { inAsiaBBox } from './util.js';
 
+// Take Global Disaster Alerting Coordination System georss data and return geojson with required properties.
+
 const GDACS = () =>
     new Promise((resolve, reject) => {
         var options = {
